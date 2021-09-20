@@ -3,11 +3,16 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/Gayle/AndroidStudioProjects/Mobile-Exercise/app/src/main/res/layout/activity_login.xml" value="0.19166666666666668" />
+        <entry key="..\:/Users/Gayle/AndroidStudioProjects/Mobile-Exercise/app/src/main/res/layout/activity_sign_up.xml" value="0.33" />
+        <entry key="..\:/Users/Gayle/AndroidStudioProjects/Mobile-Exercise/app/src/main/res/layout/fragment_login.xml" value="0.19166666666666668" />
+        <entry key="..\:/Users/Gayle/AndroidStudioProjects/Mobile-Exercise/app/src/main/res/layout/fragment_signup.xml" value="0.19166666666666668" />
+        <entry key="..\:/Users/Gayle/AndroidStudioProjects/Mobile-Exercise/app/src/main/res/xml/network_security_config.xml" value="0.1" />
         <entry key="..\:/Users/akosi/AndroidStudioProjects/MobileExercise/app/src/main/res/layout/activity_main.xml" value="0.35572916666666665" />
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">

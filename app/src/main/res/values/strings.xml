@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">Mobile-Exercise</string>
+    <string name="signup">SignUp</string>
+    <string name="login">Login</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="hintUsername">Username</string>
+    <string name="hintPassword">Password</string>
+    <string name="toLogin">Already have an account?</string>
+    <string name="toSignup">Create an Account</string>
 </resources>
