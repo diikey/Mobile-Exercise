@@ -11,7 +11,13 @@ import retrofit2.http.POST;
 import retrofit2.http.Query;
 
 public interface JsonAPI {
-    @POST("http://unilever-test.au-syd.mybluemix.net/shepherd/packuserslogin")
-    Call<Model> getModel(
-            @Body Model model);
+    @POST("packuserslogin")
+    Call<Model> login(
+            @Query("db_identifier") String db_identifier,
+            @Query("username") String username,
+            @Query("password") String password);
+
+    @POST("packusers")
+    Call<Model> signup(
+            @Body ModelArray modelArray);
 }

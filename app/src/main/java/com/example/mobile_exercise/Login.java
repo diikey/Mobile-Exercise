@@ -11,6 +11,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -26,10 +27,14 @@ public class Login extends AppCompatActivity {
     Button btnLogin;
     TextView toSignup;
 
+    HTTPHandler httpHandler;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+        httpHandler = new HTTPHandler();
 
         loginUsername = findViewById(R.id.loginUsername);
         loginPassword = findViewById(R.id.loginPassword);
@@ -41,28 +46,26 @@ public class Login extends AppCompatActivity {
                 if(loginPassword.getText().toString().equals("") || loginUsername.getText().toString().equals("")){
                     Toast.makeText(getApplicationContext(), "Wrong username or password", Toast.LENGTH_SHORT).show();
                 }else{
-                    Retrofit retrofit = new Retrofit.Builder()
-                            .baseUrl("https://unilever-test.au-syd.mybluemix.net/shepherd/")
-                            .addConverterFactory(GsonConverterFactory.create())
-                            .build();
-
-                    JsonAPI jsonAPI = retrofit.create(JsonAPI.class);
-
-                    Model model = new Model("UNILEVER",loginUsername.getText().toString(), loginPassword.getText().toString());
-
-                    Call<Model> call = jsonAPI.getModel(model);
+                    Call<Model> call = httpHandler.jsonAPI.login("UNILEVER", loginUsername.getText().toString(), loginPassword.getText().toString());
 
                     call.enqueue(new Callback<Model>() {
                         @Override
                         public void onResponse(Call<Model> call, Response<Model> response) {
                             if(!response.isSuccessful()){
-                                Log.d("Code: ", "" + response.code());
+                                Log.d("Code: ", response.code() + "");
+                                return;
                             }
-
-                            Model models = response.body();
-                            if(models.getUsername().equals(loginUsername.getText().toString()) &&
-                            models.getPassword().equals(loginPassword.getText().toString())){
-                                Toast.makeText(getApplicationContext(), "success", Toast.LENGTH_SHORT).show();
+                            try {
+                                if(response.body().getReturns().size() != 0){
+                                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                                    startActivity(intent);
+                                    finish();
+                                    Signup signup = new Signup();
+                                    signup.finish();
+                                }
+                            }catch (Exception e){
+                                Toast.makeText(getApplicationContext(), "Wrong username or password", Toast.LENGTH_SHORT).show();
+                                e.printStackTrace();
                             }
                         }
 
@@ -84,7 +87,5 @@ public class Login extends AppCompatActivity {
                 finish();
             }
         });
-
-
     }
 }

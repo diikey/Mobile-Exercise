@@ -1,51 +1,31 @@
 package com.example.mobile_exercise;
 
+import com.google.gson.annotations.SerializedName;
+
+import java.util.List;
+
 public class Model {
-    private String address;
-    private int contact_number;
-    private String created_at;
-    private String deleted_at;
-    private String firstname;
-    private String lastname;
-    private String password;
-    private String username;
+    private String status;
+    @SerializedName("return")
+    private List<ModelArray> returns = null;
+    private String message;
     private String db_identifier;
 
-    public Model(String password, String username, String db_identifier) {
-        this.password = password;
-        this.username = username;
+    public Model(String db_identifier) {
         this.db_identifier = db_identifier;
     }
 
-    public String getAddress() {
-        return address;
+
+
+    public String getStatus() {
+        return status;
     }
 
-    public int getContact_number() {
-        return contact_number;
+    public List<ModelArray> getReturns() {
+        return returns;
     }
 
-    public String getCreated_at() {
-        return created_at;
-    }
-
-    public String getDeleted_at() {
-        return deleted_at;
-    }
-
-    public String getFirstname() {
-        return firstname;
-    }
-
-    public String getLastname() {
-        return lastname;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public String getUsername() {
-        return username;
+    public String getMessage() {
+        return message;
     }
 }
