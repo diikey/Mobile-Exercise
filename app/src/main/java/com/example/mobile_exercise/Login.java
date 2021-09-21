@@ -59,9 +59,6 @@ public class Login extends AppCompatActivity {
                                 if(response.body().getReturns().size() != 0){
                                     Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                                     startActivity(intent);
-                                    finish();
-                                    Signup signup = new Signup();
-                                    signup.finish();
                                 }
                             }catch (Exception e){
                                 Toast.makeText(getApplicationContext(), "Wrong username or password", Toast.LENGTH_SHORT).show();

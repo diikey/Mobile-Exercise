@@ -15,8 +15,6 @@ public class Model {
         this.db_identifier = db_identifier;
     }
 
-
-
     public String getStatus() {
         return status;
     }

@@ -20,4 +20,7 @@ public interface JsonAPI {
     @POST("packusers")
     Call<Model> signup(
             @Body ModelArray modelArray);
+
+    @GET("packusers")
+    Call<Model> showUsers(@Query("db_identifier") String db_identifier);
 }
