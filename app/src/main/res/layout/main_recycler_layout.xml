@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:layout_marginBottom="30dp">
+
+    <LinearLayout
+        android:layout_weight="1"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/mainName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/mainFirstName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="firstname "
+                android:textSize="18sp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=" "
+                android:textSize="18sp"/>
+
+            <TextView
+                android:id="@+id/mainLastName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="lastname"
+                android:textSize="18sp"/>
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/mainAddress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Navotas"
+            android:textSize="18sp"/>
+
+        <TextView
+            android:id="@+id/mainContact"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="09173603075"
+            android:textSize="18sp"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <ImageButton
+            android:id="@+id/btnMainEdit"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:src="@drawable/ic_baseline_edit_24"
+            android:background="@drawable/round_corners_green"
+            android:layout_marginEnd="10dp"/>
+
+        <ImageButton
+            android:id="@+id/btnMainDelete"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:src="@drawable/ic_baseline_delete_24"
+            android:background="@drawable/round_corners_red"/>
+
+    </LinearLayout>
+
+</LinearLayout>

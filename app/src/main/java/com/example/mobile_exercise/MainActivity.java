@@ -3,11 +3,14 @@ package com.example.mobile_exercise;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.widget.Toast;
+import android.view.View;
 
-import java.util.List;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -15,19 +18,32 @@ import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity {
 
+    FloatingActionButton fabAdd;
+
     HTTPHandler httpHandler;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        fabAdd = findViewById(R.id.fabAdd);
+
+        fabAdd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), AddUser.class);
+                startActivity(intent);
+            }
+        });
+
         httpHandler = new HTTPHandler();
 
-        showUsers();
+        checkUsers();
     }
 
     int counter = 0;
-    public void showUsers(){
+    public void checkUsers(){
         Call<Model> modelCall = httpHandler.jsonAPI.showUsers("UNILEVER");
         modelCall.enqueue(new Callback<Model>() {
             @Override
@@ -43,13 +59,16 @@ public class MainActivity extends AppCompatActivity {
                         break;
                     }
                 }
-                if (counter == 1){
-                    FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction().replace(R.id.mainContainer, new MainPage());
-                    fragmentTransaction.commit();
-                }else{
-                    FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction().replace(R.id.mainContainer, new NothingToShow());
-                    fragmentTransaction.commit();
-                }
+
+                FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction().replace(R.id.mainContainer, new MainPage());
+                fragmentTransaction.commit();
+
+//                if (counter == 1){
+//
+//                }else{
+//                    FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction().replace(R.id.mainContainer, new NothingToShow());
+//                    fragmentTransaction.commit();
+//                }
             }
 
             @Override
@@ -57,5 +76,11 @@ public class MainActivity extends AppCompatActivity {
                 t.printStackTrace();
             }
         });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        checkUsers();
     }
 }

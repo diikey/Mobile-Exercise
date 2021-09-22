@@ -57,6 +57,7 @@ public class Login extends AppCompatActivity {
                             }
                             try {
                                 if(response.body().getReturns().size() != 0){
+                                    Toast.makeText(getApplicationContext(), "Login Successfully", Toast.LENGTH_SHORT).show();
                                     Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                                     startActivity(intent);
                                 }
