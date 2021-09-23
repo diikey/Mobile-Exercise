@@ -23,7 +23,6 @@ public class AddUser extends AppCompatActivity {
     Button btnAdd;
 
     HTTPHandler httpHandler;
-    MainPage mainPage;
 
     ModelArray modelArray;
 
@@ -39,7 +38,6 @@ public class AddUser extends AppCompatActivity {
         btnAdd = findViewById(R.id.btnAdd);
 
         httpHandler = new HTTPHandler();
-        mainPage = new MainPage();
 
         btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override

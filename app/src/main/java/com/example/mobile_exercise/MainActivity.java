@@ -62,13 +62,6 @@ public class MainActivity extends AppCompatActivity {
 
                 FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction().replace(R.id.mainContainer, new MainPage());
                 fragmentTransaction.commit();
-
-//                if (counter == 1){
-//
-//                }else{
-//                    FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction().replace(R.id.mainContainer, new NothingToShow());
-//                    fragmentTransaction.commit();
-//                }
             }
 
             @Override

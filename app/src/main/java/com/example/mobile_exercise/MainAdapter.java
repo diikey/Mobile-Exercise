@@ -89,8 +89,7 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.MainViewHolder
                                             return;
                                         }
                                         Toast.makeText(context, response.body().getMessage() + "", Toast.LENGTH_SHORT).show();
-//                                        Intent intent = new Intent(context, MainActivity.class);
-//                                        context.startActivity(intent);
+
                                         modelArrayArrayList.remove(holder.getAdapterPosition());
                                         notifyItemRemoved(holder.getAdapterPosition());
                                         if (modelArrayArrayList.size() == 0){
@@ -133,8 +132,6 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.MainViewHolder
             //imagebutton
             btnMainEdit = itemView.findViewById(R.id.btnMainEdit);
             btnMainDelete = itemView.findViewById(R.id.btnMainDelete);
-
-
         }
     }
 }
