@@ -39,41 +39,17 @@ public class MainActivity extends AppCompatActivity {
 
         httpHandler = new HTTPHandler();
 
-        checkUsers();
+        toFragment();
     }
 
-    int counter = 0;
-    public void checkUsers(){
-        Call<Model> modelCall = httpHandler.jsonAPI.showUsers("UNILEVER");
-        modelCall.enqueue(new Callback<Model>() {
-            @Override
-            public void onResponse(Call<Model> call, Response<Model> response) {
-                if(!response.isSuccessful()){
-                    Log.d("Code: ", response.code() + "");
-                    return;
-                }
-                //Toast.makeText(getApplicationContext(), response.body().getReturns().size() + "", Toast.LENGTH_SHORT).show();
-                for (int i = 0; i < response.body().getReturns().size(); i++){
-                    if(response.body().getReturns().get(i).getFirstname() != null){
-                        counter = 1;
-                        break;
-                    }
-                }
-
-                FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction().replace(R.id.mainContainer, new MainPage());
-                fragmentTransaction.commit();
-            }
-
-            @Override
-            public void onFailure(Call<Model> call, Throwable t) {
-                t.printStackTrace();
-            }
-        });
+    public void toFragment(){
+        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction().replace(R.id.mainContainer, new MainPage());
+        fragmentTransaction.commit();
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        checkUsers();
+        toFragment();
     }
 }

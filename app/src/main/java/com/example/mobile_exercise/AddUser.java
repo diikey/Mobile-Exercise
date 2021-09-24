@@ -23,6 +23,7 @@ public class AddUser extends AppCompatActivity {
     Button btnAdd;
 
     HTTPHandler httpHandler;
+    DatabaseHelper databaseHelper;
 
     ModelArray modelArray;
 
@@ -38,6 +39,7 @@ public class AddUser extends AppCompatActivity {
         btnAdd = findViewById(R.id.btnAdd);
 
         httpHandler = new HTTPHandler();
+        databaseHelper = new DatabaseHelper(getApplicationContext());
 
         btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -67,6 +69,7 @@ public class AddUser extends AppCompatActivity {
                                 return;
                             }
                             if(!response.body().getMessage().contains("exists")){
+                                databaseHelper.singleInsert(false, modelArray);
                                 Toast.makeText(getApplicationContext(), response.body().getMessage() + "", Toast.LENGTH_SHORT).show();
 
                                 finish();
@@ -77,6 +80,7 @@ public class AddUser extends AppCompatActivity {
 
                         @Override
                         public void onFailure(Call<Model> call, Throwable t) {
+                            Toast.makeText(getApplicationContext(), "Please connect to internet", Toast.LENGTH_SHORT).show();
                             t.printStackTrace();
                         }
                     });

@@ -28,6 +28,7 @@ public class Login extends AppCompatActivity {
     TextView toSignup;
 
     HTTPHandler httpHandler;
+    DatabaseHelper databaseHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +36,7 @@ public class Login extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
         httpHandler = new HTTPHandler();
+        databaseHelper = new DatabaseHelper(getApplicationContext());
 
         loginUsername = findViewById(R.id.loginUsername);
         loginPassword = findViewById(R.id.loginPassword);
@@ -70,6 +72,13 @@ public class Login extends AppCompatActivity {
                         @Override
                         public void onFailure(Call<Model> call, Throwable t) {
                             t.printStackTrace();
+                            if(databaseHelper.login(loginUsername.getText().toString(), loginPassword.getText().toString()).getCount() != 0){
+                                Toast.makeText(getApplicationContext(), "Login Successfully. OFFLINE MODE", Toast.LENGTH_SHORT).show();
+                                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                                startActivity(intent);
+                            }else{
+                                Toast.makeText(getApplicationContext(), "Wrong username or password", Toast.LENGTH_SHORT).show();
+                            }
                         }
                     });
                 }

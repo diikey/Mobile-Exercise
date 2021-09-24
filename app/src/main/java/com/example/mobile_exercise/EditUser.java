@@ -20,6 +20,7 @@ public class EditUser extends AppCompatActivity {
     Button btnEdit;
 
     HTTPHandler httpHandler;
+    DatabaseHelper databaseHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +35,7 @@ public class EditUser extends AppCompatActivity {
         getUser();
 
         httpHandler = new HTTPHandler();
+        databaseHelper = new DatabaseHelper(getApplicationContext());
 
         btnEdit = findViewById(R.id.btnEdit);
         btnEdit.setOnClickListener(new View.OnClickListener() {
@@ -60,12 +62,14 @@ public class EditUser extends AppCompatActivity {
                                 Log.d("Code: ", response.code() + "");
                                 return;
                             }
+                            databaseHelper.editUsers(modelArray);
                             Toast.makeText(getApplicationContext(), "Edited Successfully", Toast.LENGTH_SHORT).show();
                             finish();
                         }
 
                         @Override
                         public void onFailure(Call<Model> call, Throwable t) {
+                            Toast.makeText(getApplicationContext(), "Please connect to internet", Toast.LENGTH_SHORT).show();
                             t.printStackTrace();
                         }
                     });

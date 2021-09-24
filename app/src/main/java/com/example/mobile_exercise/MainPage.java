@@ -27,6 +27,7 @@ public class MainPage extends Fragment {
 
     MainAdapter mainAdapter;
     HTTPHandler httpHandler;
+    DatabaseHelper databaseHelper;
 
     ArrayList<ModelArray> modelArrayArrayList = new ArrayList<>();
 
@@ -35,6 +36,8 @@ public class MainPage extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_main_page, container, false);
+
+        databaseHelper = new DatabaseHelper(getActivity());
 
         mainRecyclerView = view.findViewById(R.id.mainRecyclerView);
         nothing = view.findViewById(R.id.nothing);
@@ -66,11 +69,10 @@ public class MainPage extends Fragment {
 
                 if(modelArrayArrayList.size() > 0){
                     nothing.setVisibility(View.GONE);
-                    textView.setText("Nothing to show!");
                 }else{
                     mainRecyclerView.setVisibility(View.GONE);
-                    textView.setText("Nothing to show!");
                 }
+                textView.setText("Nothing to show!");
                 mainAdapter = new MainAdapter(modelArrayArrayList, getActivity());
                 mainRecyclerView.setAdapter(mainAdapter);
             }
@@ -78,6 +80,20 @@ public class MainPage extends Fragment {
             @Override
             public void onFailure(Call<Model> call, Throwable t) {
                 t.printStackTrace();
+
+                textView.setText("Loading...");
+                mainRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+
+                modelArrayArrayList.addAll(databaseHelper.showUsers());
+
+                if(modelArrayArrayList.size() > 0){
+                    nothing.setVisibility(View.GONE);
+                }else{
+                    mainRecyclerView.setVisibility(View.GONE);
+                }
+                textView.setText("Nothing to show!");
+                mainAdapter = new MainAdapter(modelArrayArrayList, getActivity());
+                mainRecyclerView.setAdapter(mainAdapter);
             }
         });
     }

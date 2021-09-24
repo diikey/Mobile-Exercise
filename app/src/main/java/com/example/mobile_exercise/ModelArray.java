@@ -28,6 +28,13 @@ public class ModelArray {
         this.db_identifier = db_identifier;
     }
 
+    public ModelArray(String address, String contact_number, String firstname, String lastname) {
+        this.address = address;
+        this.contact_number = contact_number;
+        this.firstname = firstname;
+        this.lastname = lastname;
+    }
+
     public String getAddress() {
         return address;
     }

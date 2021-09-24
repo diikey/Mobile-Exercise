@@ -29,6 +29,7 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.MainViewHolder
     Context context;
 
     HTTPHandler httpHandler;
+    DatabaseHelper databaseHelper;
 
     public MainAdapter(ArrayList<ModelArray> modelArrayArrayList, Context context) {
         this.modelArrayArrayList = modelArrayArrayList;
@@ -45,6 +46,8 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.MainViewHolder
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
         View view = layoutInflater.inflate(R.layout.main_recycler_layout, parent, false);
         MainViewHolder mainViewHolder = new MainViewHolder(view);
+
+        databaseHelper = new DatabaseHelper(context);
 
         return mainViewHolder;
     }
@@ -88,6 +91,7 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.MainViewHolder
                                             Log.d("Code: ", response.code() + "");
                                             return;
                                         }
+                                        databaseHelper.deleteUsers(username);
                                         Toast.makeText(context, response.body().getMessage() + "", Toast.LENGTH_SHORT).show();
 
                                         modelArrayArrayList.remove(holder.getAdapterPosition());
@@ -100,6 +104,7 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.MainViewHolder
 
                                     @Override
                                     public void onFailure(Call<Model> call, Throwable t) {
+                                        Toast.makeText(context, "Please connect to internet", Toast.LENGTH_SHORT).show();
                                         t.printStackTrace();
                                     }
                                 });

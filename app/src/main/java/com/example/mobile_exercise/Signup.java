@@ -22,6 +22,7 @@ public class Signup extends AppCompatActivity {
     TextView toLogin;
 
     HTTPHandler httpHandler;
+    DatabaseHelper databaseHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +30,8 @@ public class Signup extends AppCompatActivity {
         setContentView(R.layout.activity_signup);
 
         httpHandler = new HTTPHandler();
+        //insert from api to local db
+        databaseHelper = new DatabaseHelper(getApplicationContext());
 
         signupUsername = findViewById(R.id.signupUsername);
         signupPassword = findViewById(R.id.signupPassword);
@@ -51,17 +54,18 @@ public class Signup extends AppCompatActivity {
                                 Log.d("Code: ", "" + response.code());
                                 return;
                             }
+                            Log.d("Code: ", "" + response.code());
+                            Toast.makeText(getApplicationContext(), response.body().getMessage() + "", Toast.LENGTH_SHORT).show();
                             if(!response.body().getMessage().contains("exists")){
-                                Toast.makeText(getApplicationContext(), response.body().getMessage() + "", Toast.LENGTH_SHORT).show();
+                                databaseHelper.singleInsert(true, model);
                                 Intent intent = new Intent(getApplicationContext(), Login.class);
                                 startActivity(intent);
-                            }else{
-                                Toast.makeText(getApplicationContext(), response.body().getMessage() + "", Toast.LENGTH_SHORT).show();
                             }
                         }
 
                         @Override
                         public void onFailure(Call<Model> call, Throwable t) {
+                            Toast.makeText(getApplicationContext(), "Please connect to internet", Toast.LENGTH_SHORT).show();
                             t.printStackTrace();
                         }
                     });
